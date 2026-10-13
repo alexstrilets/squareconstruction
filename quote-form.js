@@ -6,7 +6,9 @@
      2. Set its To email to Alex's address.
      3. Use these variables in the template body:
         {{name}} {{phone}} {{customer_email}} {{project_type}} {{details}}
-     4. Paste the template ID into EMAILJS_TEMPLATE_ID below. */
+     4. To receive the optional job photo as an attachment: template settings
+        → Attachments → add a file attachment mapped to the {{photo}} variable.
+     5. Paste the template ID into EMAILJS_TEMPLATE_ID below. */
 (function () {
   'use strict';
 
@@ -50,7 +52,11 @@
       'q-phone': function (v) { return (v.replace(/\D/g, '').length) >= 10; },
       'q-email': function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); },
       'q-type': function (v) { return v !== ''; },
-      'q-details': function (v) { return v.trim().length > 10; }
+      'q-details': function (v) { return v.trim().length > 10; },
+      'q-photo': function () {
+        var f = document.getElementById('q-photo').files[0];
+        return !f || f.size <= 2 * 1024 * 1024;
+      }
     };
     Object.keys(validators).forEach(function (id) {
       var field = document.getElementById(id);
@@ -98,12 +104,15 @@
       submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...';
       setStatus('', true);
 
-      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-        name: data.name,
-        phone: data.phone,
-        customer_email: data.email,
-        project_type: data.project_type,
-        details: data.details
+      readPhoto().then(function (photoDataUrl) {
+        return emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+          name: data.name,
+          phone: data.phone,
+          customer_email: data.email,
+          project_type: data.project_type,
+          details: data.details,
+          photo: photoDataUrl || ''
+        });
       }).then(function () {
         setStatus('Quote request sent. We usually reply within one business day.', true);
         form.reset();
@@ -117,6 +126,18 @@
         submitButton.innerHTML = originalButtonText;
       });
     });
+
+    /* Optional job photo → base64 data URL for the {{photo}} template variable. */
+    function readPhoto() {
+      return new Promise(function (resolve) {
+        var file = document.getElementById('q-photo').files[0];
+        if (!file) { resolve(''); return; }
+        var reader = new FileReader();
+        reader.onload = function () { resolve(reader.result); };
+        reader.onerror = function () { resolve(''); };
+        reader.readAsDataURL(file);
+      });
+    }
 
     function setStatus(text, ok) {
       if (!status) return;

@@ -375,6 +375,17 @@
   margin: 6px 0 0;
 }
 
+.field-hint {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin: 6px 0 0;
+}
+
+.optional {
+  font-weight: 400;
+  color: var(--muted);
+}
+
 .quote .email-form input[aria-invalid="true"],
 .quote .email-form textarea[aria-invalid="true"],
 .quote .email-form select[aria-invalid="true"] {
@@ -601,6 +612,50 @@
     var(--grid-tile),
     linear-gradient(135deg, var(--tint) 0%, #e7e0cf 100%);
   background-size: 48px 48px, auto;
+}
+
+/*--------------------------------------------------------------
+# Why us
+--------------------------------------------------------------*/
+.why .why-item {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 28px 24px;
+  height: 100%;
+  transition: var(--transition);
+}
+
+.why .why-item:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lift);
+}
+
+.why .why-item i {
+  font-size: 26px;
+  color: var(--safety-ink);
+  background: var(--safety);
+  width: 56px;
+  height: 56px;
+  line-height: 56px;
+  text-align: center;
+  border-radius: 16px;
+  margin-bottom: 16px;
+  display: inline-block;
+}
+
+.why .why-item h4 {
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+  color: var(--ink);
+}
+
+.why .why-item p {
+  color: var(--muted);
+  font-size: 0.93rem;
+  margin: 0;
 }
 
 /*--------------------------------------------------------------
