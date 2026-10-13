@@ -40,6 +40,8 @@ Type: **Playfair Display** = display voice (hero + section titles only),
 **Poppins** = everything else. Radii: `--radius-card: 16px`,
 `--radius-pill: 999px`. Shadows: `--shadow-card`, `--shadow-lift`.
 Motion: `--transition: 0.25s ease`, with `prefers-reduced-motion` honored.
+Dark appearance: `tokens.css` ships a `prefers-color-scheme: dark` override —
+semantic tokens only, no app-level switch (all pairs re-checked ≥ 4.5:1).
 
 ### Signature element: the hazard stripe
 

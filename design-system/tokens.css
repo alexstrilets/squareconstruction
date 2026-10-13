@@ -51,3 +51,33 @@
   /* Hazard striping — the signature texture, keep at low opacity */
   --stripe-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M-6 6 L6 -6 M0 24 L24 0 M18 30 L30 18' stroke='%23E8590C' stroke-opacity='0.14' stroke-width='5'/%3E%3C/svg%3E");
 }
+
+/*--------------------------------------------------------------
+# Dark appearance — semantic tokens, no app-level switch.
+# Contrast vs. dark surfaces: ink 15.1:1, muted 7.5:1,
+# safety-ink on safety 5.9:1, ember-deep 7.6:1, steel 8.0:1.
+--------------------------------------------------------------*/
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #1b1813;
+    --card: #24211b;
+    --tint: #221f18;
+    --line: #3a352a;
+    --ink: #f2ede1;
+    --muted: #b3a88f;
+    --safety: #f4701f;
+    --safety-soft: #3a2a18;
+    --safety-ink: #2e1500;
+    --ember-deep: #f0925a;
+    --steel: #9fb0c2;
+    --steel-deep: #7d8fa1;
+    --ok: #7cc47f;
+    --ok-bg: #1e2f20;
+    --busy: #a89a86;
+    --busy-bg: #2c2820;
+    --night: #14120d;
+
+    --shadow-card: 0 2px 6px rgba(0, 0, 0, 0.3), 0 12px 32px rgba(0, 0, 0, 0.35);
+    --shadow-lift: 0 4px 10px rgba(0, 0, 0, 0.35), 0 20px 44px rgba(0, 0, 0, 0.45);
+  }
+}

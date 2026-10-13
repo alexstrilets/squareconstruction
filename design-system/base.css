@@ -365,3 +365,25 @@ section {
     margin-right: auto;
   }
 }
+
+/* One orchestrated entrance: hero content rises once on load.
+   Disabled entirely under prefers-reduced-motion (see components.css). */
+@media (prefers-reduced-motion: no-preference) {
+  .hero .col-lg-6:first-child {
+    animation: hero-rise 0.7s ease both;
+  }
+  .hero .col-lg-6:last-child {
+    animation: hero-rise 0.7s ease 0.12s both;
+  }
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

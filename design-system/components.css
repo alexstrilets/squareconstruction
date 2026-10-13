@@ -367,6 +367,20 @@
   color: var(--ember-deep);
 }
 
+/* Inline field errors: named next to the field, say how to fix it. */
+.field-error {
+  color: var(--ember-deep);
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin: 6px 0 0;
+}
+
+.quote .email-form input[aria-invalid="true"],
+.quote .email-form textarea[aria-invalid="true"],
+.quote .email-form select[aria-invalid="true"] {
+  border-color: var(--ember-deep);
+}
+
 /*--------------------------------------------------------------
 # FAQ
 --------------------------------------------------------------*/

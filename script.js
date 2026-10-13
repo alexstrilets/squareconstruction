@@ -44,15 +44,6 @@
       });
     });
 
-    /* Quote form: warn loudly if the delivery endpoint is still a placeholder */
-    var form = document.getElementById('quote-form');
-    var status = document.getElementById('form-status');
-    if (form && status && form.action.indexOf('YOUR_FORM_ID') !== -1) {
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        status.textContent = 'Heads up: the form is not wired to an inbox yet — set the Formspree/EmailJS endpoint (see the comment in index.html) before launch.';
-        status.className = 'form-status error';
-      });
-    }
+    /* Footer year is set above; the quote form wires itself up in quote-form.js. */
   });
 })();
