@@ -39,9 +39,17 @@
   --font-display: "Playfair Display", Georgia, serif;
   --font-body: "Poppins", -apple-system, "Segoe UI", sans-serif;
 
+  /* Surfaces that must follow the color scheme (see dark override below) */
+  --nav-bg: rgba(253, 252, 248, 0.88);
+  --hero-top: #fdfcf8;
+  --hero-bottom: #f7f3ea;
+  --hero-glow: #fdeadb;
+  --pill-bg: rgba(255, 255, 255, 0.7);
+  --on-steel: #ffffff;
+  --img-ring: rgba(255, 255, 255, 0.6);
+
   --radius-card: 16px;
-  --radius-pill: 999px;
-  --shadow-card: 0 2px 6px rgba(35, 30, 18, 0.06), 0 12px 32px rgba(35, 30, 18, 0.08);
+  --radius-pill: 999px;  --shadow-card: 0 2px 6px rgba(35, 30, 18, 0.06), 0 12px 32px rgba(35, 30, 18, 0.08);
   --shadow-lift: 0 4px 10px rgba(35, 30, 18, 0.08), 0 20px 44px rgba(35, 30, 18, 0.14);
   --transition: 0.25s ease;
 
@@ -76,6 +84,14 @@
     --busy: #a89a86;
     --busy-bg: #2c2820;
     --night: #14120d;
+
+    --nav-bg: rgba(27, 24, 19, 0.88);
+    --hero-top: #201c15;
+    --hero-bottom: #191510;
+    --hero-glow: #3a2a18;
+    --pill-bg: rgba(36, 33, 27, 0.7);
+    --on-steel: #14120d;
+    --img-ring: rgba(255, 255, 255, 0.14);
 
     --shadow-card: 0 2px 6px rgba(0, 0, 0, 0.3), 0 12px 32px rgba(0, 0, 0, 0.35);
     --shadow-lift: 0 4px 10px rgba(0, 0, 0, 0.35), 0 20px 44px rgba(0, 0, 0, 0.45);

@@ -320,7 +320,7 @@
   border-color: var(--safety);
   box-shadow: 0 0 0 3px rgba(232, 89, 12, 0.22);
   outline: none;
-  background: #fff;
+  background: var(--card);
 }
 
 .quote .email-form input {
@@ -573,7 +573,7 @@
 .hero-photo-placeholder {
   border-radius: 28px;
   box-shadow: var(--shadow-lift);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--img-ring);
   background:
     var(--stripe-tile),
     linear-gradient(135deg, var(--tint) 0%, #e9e2d2 100%);
