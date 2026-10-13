@@ -1,0 +1,53 @@
+/*--------------------------------------------------------------
+# Square Construction — design system · tokens
+#
+# Derived from the HoneycombsAndMore apple-design refresh (2026-10-12):
+# same token architecture and component rhythm, construction identity.
+#
+# Contrast figures vs. their surfaces (WCAG AA):
+#   --ink        #23211B  15.7:1 on --paper   (primary text)
+#   --muted      #6E685B   5.4:1 on --paper   (secondary text)
+#   --safety     #E8590C  accent fill only    (never as text on light)
+#   --safety-ink #2E1500   4.8:1 on --safety  (text on orange fills)
+#   --ember-deep #A83E05   6.1:1 on --paper   (text accent)
+#   --steel      #445060   8.2:1 on white     (secondary actions)
+#   --ok         #2F7D32   5.1:1 on white     (available signal)
+# Type: Playfair Display = display voice (hero + section titles only),
+#       Poppins = everything else.
+# Signature element: the hazard stripe — diagonal safety-orange
+# striping, used sparingly (eyebrow tick, hero texture, footer rule).
+--------------------------------------------------------------*/
+:root {
+  --paper: #fdfcf8;
+  --card: #ffffff;
+  --tint: #f4f2ec;
+  --line: #e4dfd4;
+  --ink: #23211b;
+  --muted: #6e685b;
+  --safety: #e8590c;
+  --safety-soft: #fdeadb;
+  --safety-ink: #2e1500;
+  --ember-deep: #a83e05;
+  --steel: #445060;
+  --steel-deep: #333d48;
+  --ok: #2f7d32;
+  --ok-bg: #e9f4ea;
+  --busy: #8a7f70;
+  --busy-bg: #f1ece2;
+  --night: #211d16;
+
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Poppins", -apple-system, "Segoe UI", sans-serif;
+
+  --radius-card: 16px;
+  --radius-pill: 999px;
+  --shadow-card: 0 2px 6px rgba(35, 30, 18, 0.06), 0 12px 32px rgba(35, 30, 18, 0.08);
+  --shadow-lift: 0 4px 10px rgba(35, 30, 18, 0.08), 0 20px 44px rgba(35, 30, 18, 0.14);
+  --transition: 0.25s ease;
+
+  /* Blueprint grid — faint, for hero backgrounds */
+  --grid-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath d='M48 0 H0 V48' fill='none' stroke='%23445060' stroke-opacity='0.08' stroke-width='1'/%3E%3C/svg%3E");
+
+  /* Hazard striping — the signature texture, keep at low opacity */
+  --stripe-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M-6 6 L6 -6 M0 24 L24 0 M18 30 L30 18' stroke='%23E8590C' stroke-opacity='0.14' stroke-width='5'/%3E%3C/svg%3E");
+}

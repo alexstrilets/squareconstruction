@@ -1,0 +1,637 @@
+/*--------------------------------------------------------------
+# Square Construction — design system · components
+# Cards, badges, process steps, quote form, FAQ, footer.
+--------------------------------------------------------------*/
+@import url("tokens.css");
+
+/*--------------------------------------------------------------
+# About
+--------------------------------------------------------------*/
+.about .content ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.about .content ul li {
+  padding-left: 34px;
+  position: relative;
+  margin-bottom: 14px;
+  font-size: 1.02rem;
+}
+
+.about .content ul i {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  font-size: 20px;
+  color: var(--ember-deep);
+  line-height: 1.4;
+}
+
+.about .content p {
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.about .content p strong,
+.about .content ul strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/*--------------------------------------------------------------
+# Services
+--------------------------------------------------------------*/
+.services .service-box {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 24px 28px;
+  box-shadow: var(--shadow-card);
+  height: 100%;
+  text-align: center;
+  transition: var(--transition);
+  border-radius: var(--radius-card);
+  background: var(--card);
+  border: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+
+.services .service-box:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lift);
+}
+
+.service-media {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  aspect-ratio: 4 / 3;
+  background: var(--tint);
+}
+
+.services .service-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: var(--transition);
+}
+
+.services .service-box:hover img {
+  transform: scale(1.04);
+}
+
+.status-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.status-badge.available {
+  color: var(--ok);
+  background: rgba(233, 244, 234, 0.94);
+  border: 1px solid rgba(47, 125, 50, 0.25);
+}
+
+.status-badge.busy {
+  color: var(--busy);
+  background: rgba(241, 236, 226, 0.94);
+  border: 1px solid rgba(138, 127, 112, 0.3);
+}
+
+.services .service-box h3 {
+  font-weight: 700;
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+  color: var(--ink);
+  font-family: var(--font-body);
+  letter-spacing: -0.01em;
+}
+
+.services .service-box p {
+  margin-bottom: 18px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  flex: 0 1 auto;
+}
+
+.services .service-box .rate {
+  font-size: 1.05rem;
+  color: var(--ember-deep);
+  font-weight: 600;
+  margin-bottom: 18px;
+  margin-top: auto;
+  letter-spacing: -0.01em;
+}
+
+.services .service-box .rate span {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+/*--------------------------------------------------------------
+# Process
+--------------------------------------------------------------*/
+.process .process-step {
+  padding: 34px 28px;
+  position: relative;
+  overflow: hidden;
+  background: var(--card);
+  box-shadow: var(--shadow-card);
+  transition: var(--transition);
+  border-radius: var(--radius-card);
+  text-align: center;
+  height: 100%;
+  border: 1px solid var(--line);
+}
+
+.process .process-step:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lift);
+}
+
+.process .process-step .step-num {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ember-deep);
+  display: block;
+  margin-bottom: 14px;
+}
+
+.process .process-step .icon {
+  margin-bottom: 18px;
+}
+
+.process .process-step .icon i {
+  font-size: 30px;
+  width: 76px;
+  height: 76px;
+  line-height: 76px;
+  text-align: center;
+  color: var(--safety-ink);
+  background: var(--safety-soft);
+  border: 1.5px solid rgba(232, 89, 12, 0.4);
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+.process .process-step:hover .icon i {
+  background: var(--safety);
+  border-color: var(--safety);
+  transform: scale(1.05);
+}
+
+.process .process-step h4 {
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  color: var(--ink);
+}
+
+.process .process-step p {
+  color: var(--muted);
+  margin-bottom: 0;
+  font-size: 0.95rem;
+}
+
+/*--------------------------------------------------------------
+# Quote (form + contact info panels)
+--------------------------------------------------------------*/
+.quote .info,
+.quote .quote-form {
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--safety);
+  padding: 32px;
+  background: var(--card);
+  box-shadow: var(--shadow-card);
+  height: 100%;
+  border-radius: var(--radius-card);
+  transition: var(--transition);
+}
+
+.quote .info:hover,
+.quote .quote-form:hover {
+  box-shadow: var(--shadow-lift);
+}
+
+.quote .info > div {
+  margin-bottom: 22px;
+}
+
+.quote .info > div:last-child {
+  margin-bottom: 0;
+}
+
+.quote .info i {
+  font-size: 18px;
+  color: var(--steel);
+  float: left;
+  width: 44px;
+  height: 44px;
+  background: var(--safety-soft);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+.quote .info h4 {
+  padding: 0 0 0 60px;
+  font-size: 1.02rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+
+.quote .info p {
+  padding: 0 0 0 60px;
+  margin-bottom: 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.quote .quote-form h4 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--ink);
+}
+
+.quote .quote-form > p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+.quote .email-form {
+  width: 100%;
+}
+
+.quote .email-form .form-group {
+  padding-bottom: 10px;
+}
+
+.quote .email-form label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+  display: block;
+}
+
+.quote .email-form input,
+.quote .email-form textarea,
+.quote .email-form select {
+  border-radius: 10px;
+  box-shadow: none;
+  font-size: 0.95rem;
+  padding: 12px 15px;
+  border: 1.5px solid var(--line);
+  transition: var(--transition);
+  background: var(--paper);
+  color: var(--ink);
+  width: 100%;
+  font-family: var(--font-body);
+}
+
+.quote .email-form input::placeholder,
+.quote .email-form textarea::placeholder {
+  color: #a89e8c;
+}
+
+.quote .email-form input:focus,
+.quote .email-form textarea:focus,
+.quote .email-form select:focus {
+  border-color: var(--safety);
+  box-shadow: 0 0 0 3px rgba(232, 89, 12, 0.22);
+  outline: none;
+  background: #fff;
+}
+
+.quote .email-form input {
+  height: 50px;
+}
+
+.quote .email-form textarea {
+  padding: 12px 15px;
+  resize: vertical;
+  min-height: 120px;
+}
+
+.quote .email-form button[type="submit"] {
+  background: var(--safety);
+  border: 0;
+  padding: 14px 40px;
+  color: var(--safety-ink);
+  transition: var(--transition);
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  margin-top: 10px;
+  box-shadow: 0 6px 18px rgba(232, 89, 12, 0.32);
+  cursor: pointer;
+}
+
+.quote .email-form button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(232, 89, 12, 0.4);
+}
+
+.form-status {
+  margin-top: 14px;
+  font-size: 0.92rem;
+  min-height: 1.5em;
+}
+
+.form-status.success {
+  color: var(--ok);
+}
+
+.form-status.error {
+  color: var(--ember-deep);
+}
+
+/*--------------------------------------------------------------
+# FAQ
+--------------------------------------------------------------*/
+.faq-section {
+  background-color: var(--paper);
+}
+
+.faq-accordion {
+  margin-top: 8px;
+}
+
+.faq-item {
+  margin-bottom: 12px;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background-color: var(--card);
+  transition: var(--transition);
+}
+
+.faq-item:has(.faq-question[aria-expanded="true"]) {
+  box-shadow: var(--shadow-card);
+  border-color: rgba(232, 89, 12, 0.45);
+}
+
+/* Real <button>: keyboard operable, announced by screen readers. */
+.faq-question {
+  width: 100%;
+  padding: 20px 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  text-align: left;
+  transition: var(--transition);
+  font-family: var(--font-body);
+}
+
+.faq-question:hover {
+  background-color: var(--safety-soft);
+}
+
+.faq-question h3 {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--ink);
+  font-family: var(--font-body);
+  letter-spacing: -0.005em;
+}
+
+.faq-arrow {
+  color: var(--ember-deep);
+  font-size: 0.9rem;
+  transition: var(--transition);
+  flex: none;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--safety-soft);
+}
+
+.faq-question[aria-expanded="true"] .faq-arrow {
+  background: var(--safety);
+  color: var(--safety-ink);
+}
+
+.faq-question[aria-expanded="true"] .faq-arrow i {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  padding: 0 24px;
+  display: none;
+  border-top: 1px solid var(--line);
+}
+
+.faq-question[aria-expanded="true"] + .faq-answer {
+  display: block;
+}
+
+.faq-answer p {
+  padding: 18px 0 22px;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 0.97rem;
+}
+
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+#footer {
+  background: var(--night);
+  color: #d9d2c4;
+  font-size: 0.92rem;
+  position: relative;
+}
+
+#footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--safety), var(--steel), var(--safety));
+}
+
+#footer .footer-top {
+  padding: 64px 0 36px;
+}
+
+#footer .footer-top .row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+#footer .footer-top h3,
+#footer .footer-top h4 {
+  font-size: 1.05rem;
+  margin: 0 0 18px;
+  font-weight: 600;
+  color: #fff;
+  font-family: var(--font-body);
+  letter-spacing: 0.02em;
+}
+
+#footer .footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#footer .footer-links li {
+  margin-bottom: 10px;
+}
+
+#footer .footer-links a {
+  color: #d9d2c4;
+  font-size: 0.92rem;
+}
+
+#footer .footer-links a:hover {
+  color: var(--safety);
+}
+
+#footer .footer-contact {
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+#footer .footer-contact p {
+  color: #b6ac99;
+  font-size: 0.92rem;
+}
+
+#footer .copyright {
+  color: #b6ac99;
+}
+
+#footer .copyright strong {
+  color: #fff;
+}
+
+#footer .footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 22px 0;
+}
+
+/* Placeholder panels (swap for real photos later) */
+.hero-photo-placeholder {
+  border-radius: 28px;
+  box-shadow: var(--shadow-lift);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background:
+    var(--stripe-tile),
+    linear-gradient(135deg, var(--tint) 0%, #e9e2d2 100%);
+  background-size: 24px 24px, auto;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--muted);
+}
+
+.hero-photo-placeholder i {
+  font-size: 3rem;
+  color: var(--steel);
+  opacity: 0.6;
+}
+
+.hero-photo-placeholder span {
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.service-media .service-icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.2rem;
+  color: var(--steel);
+  opacity: 0.35;
+  background:
+    var(--grid-tile),
+    linear-gradient(135deg, var(--tint) 0%, #e7e0cf 100%);
+  background-size: 48px 48px, auto;
+}
+
+/*--------------------------------------------------------------
+# Motion discipline — honor the OS reduced-motion setting
+--------------------------------------------------------------*/
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/*--------------------------------------------------------------
+# Responsive refinements
+--------------------------------------------------------------*/
+@media (max-width: 991px) {
+  section {
+    padding: 64px 0;
+  }
+
+  .quote .info {
+    margin-bottom: 24px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-cta .btn-primary,
+  .hero-cta .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
+
+  .services .service-box {
+    padding: 20px 18px 24px;
+  }
+
+  .faq-question {
+    padding: 16px 18px;
+  }
+}
