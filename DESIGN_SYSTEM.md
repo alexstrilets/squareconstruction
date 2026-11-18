@@ -1,8 +1,11 @@
 # Square Construction — Design System
 
 A token-based design system for the Square Construction marketing site, derived
-from the HoneycombsAndMore apple-design refresh (Oct 2026). Same architecture,
-same component rhythm — construction identity.
+from **Stripe's design language** (Nov 2026). The token architecture and
+component rhythm of the earlier systems are unchanged — the skin is new:
+deep navy ink, blurple actions, cool-grey tints, layered soft shadows, and
+Stripe's gradient mesh kept on a short leash so the site still reads as a
+trustworthy local contractor, not a fintech.
 
 ## Files
 
@@ -20,75 +23,107 @@ one in the page is enough. `index.html` links both.
 
 | Token | Value | Use |
 |---|---|---|
-| `--paper` | `#fdfcf8` | Page background |
+| `--paper` | `#ffffff` | Page background |
 | `--card` | `#ffffff` | Card surfaces |
-| `--tint` | `#f4f2ec` | Alternating section background (`.section-bg`) |
-| `--line` | `#e4dfd4` | Borders, dividers |
-| `--ink` | `#23211b` | Primary text (15.7:1 on paper) |
-| `--muted` | `#6e685b` | Secondary text (5.4:1 on paper) |
-| `--safety` | `#e8590c` | Accent fill — buttons, highlights. Never as text on light |
-| `--safety-soft` | `#fdeadb` | Tinted accent backgrounds (icon circles, FAQ hover) |
-| `--safety-ink` | `#2e1500` | Text on `--safety` fills (4.8:1) |
-| `--ember-deep` | `#a83e05` | Text accent — eyebrows, prices, links (6.1:1 on paper) |
-| `--steel` | `#445060` | Secondary actions, outlines (8.2:1 on white) |
-| `--steel-deep` | `#333d48` | Darker steel for hover states |
-| `--ok` / `--ok-bg` | `#2f7d32` / `#e9f4ea` | "Available" status badges |
-| `--busy` / `--busy-bg` | `#8a7f70` / `#f1ece2` | "Booking out" status badges |
-| `--night` | `#211d16` | Footer background |
+| `--tint` | `#f6f9fc` | Alternating section background (`.section-bg`) |
+| `--line` | `#e3e8ee` | Borders, dividers |
+| `--ink` | `#0a2540` | Headings, primary text (15.5:1 on white) |
+| `--muted` | `#425466` | Body / secondary text (7.8:1 on white) |
+| `--faint` | `#697386` | Hints, captions (4.8:1 on white) |
+| `--placeholder` | `#a7b5c6` | Input placeholder text |
+| `--primary` | `#635bff` | Primary actions, links, accents (4.7:1 on white) |
+| `--primary-deep` | `#4a42d6` | Primary hover/active |
+| `--primary-soft` | `#efeeff` | Tinted accent backgrounds (icon chips, FAQ arrow) |
+| `--primary-line` | `rgba(99,91,255,.45)` | Accent borders (open FAQ item, icon rings) |
+| `--on-primary` | `#ffffff` | Text on `--primary` fills (4.7:1) |
+| `--ring` | `rgba(99,91,255,.28)` | Focus glow ring on form fields |
+| `--ok` / `--ok-bg` | `#12714a` / `#e7f6ee` | "Available" status badges (5.4:1) |
+| `--busy` / `--busy-bg` | `#8a5a00` / `#fdf1de` | "Booking out" status badges (5.3:1) |
+| `--error` | `#df1b41` | Field errors, failed form status (4.8:1 on white) |
+| `--night` | `#0a2540` | Footer background |
+| `--footer-text` / `--footer-muted` | `#cbd6e8` / `#8ea3c0` | Footer text on navy (10.6:1 / 6.0:1) |
 
-Type: **Playfair Display** = display voice (hero + section titles only),
-**Poppins** = everything else. Radii: `--radius-card: 16px`,
-`--radius-pill: 999px`. Shadows: `--shadow-card`, `--shadow-lift`.
+Type: **Inter** throughout. There is no separate display face — headings take
+the display voice from weight (600–700) and tight tracking (`-0.02em`), body
+text runs 400/500. Radii: `--radius-card: 16px`, `--radius-btn: 8px`,
+`--radius-input: 8px`, `--radius-pill: 999px`. Shadows are layered and
+navy-tinted (`--shadow-card`, `--shadow-lift`, plus button and nav variants).
 Motion: `--transition: 0.25s ease`, with `prefers-reduced-motion` honored.
-Dark appearance: `tokens.css` ships a `prefers-color-scheme: dark` override —
-semantic tokens only, no app-level switch (all pairs re-checked ≥ 4.5:1).
 
-### Signature element: the hazard stripe
+Dark appearance: **not shipped.** The previous system carried a
+`prefers-color-scheme: dark` override; Stripe's marketing surfaces are light,
+so this one is too. The tokens stay semantic, so a dark scheme can be re-added
+as a single override block in `tokens.css` if it's ever wanted.
 
-The bees site has the hexagon; this system has diagonal safety striping.
-Use sparingly — it's an accent, not a background:
+### Signature element: the gradient mesh
 
-- `.eyebrow::before` and `.hero-eyebrow .tick` — the 12px striped tick
-- `--stripe-tile` — faint striped texture (hero photo accent, placeholders)
-- `--grid-tile` — faint blueprint grid (hero background texture)
-- Footer top rule — safety → steel → safety gradient
+Stripe's signature is the colourful gradient mesh (purple → cyan → coral).
+Here it is deliberately scarce — a construction site has to read trustworthy
+first:
+
+- `--gradient-mesh` — layered radial washes in `--grad-purple` `#635bff`,
+  `--grad-cyan` `#00d4ff`, `--grad-coral` `#ff8a5c`, at 13–20% opacity
+- Hero background — the mesh washing the top edge over a white → tint fade
+- Hero photo glow — the same mesh, blurred, behind the hero image
+
+The old hazard stripe survives in exactly **one** place: `--hazard`, the
+diagonal blurple striping used as the footer top rule. The blueprint grid and
+the eyebrow tick are gone; eyebrows are plain small-caps text in `--primary`,
+and the hero pill carries a small blurple dot instead.
 
 ## Components
 
-- **Section titles** — `.section-title` with one `.eyebrow` and one `h2`. Centered, max 640px.
-- **Buttons** — `.btn-primary` (safety fill, one per view) and `.btn-secondary` (steel outline, never competes).
-- **Navbar** — translucent blur bar, shrinks on scroll (`.navbar-scrolled`), amber underline on active/hover links.
-- **Hero** — 92vh, blueprint-grid texture, eyebrow pill, `clamp()` display headline, primary + secondary CTAs, photo panel with hazard-stripe accent.
-- **Service cards** — `.service-box`: media area, `.status-badge` (`.available` / `.busy`), title, copy, `.rate` line, CTA. Hover lifts the card and zooms the media.
-- **Process steps** — `.process-step`: eyebrow step number, icon circle that fills on hover, title, copy.
-- **Quote panels** — `.quote .info` (contact rows with icon circles) and `.quote .quote-form` (accent top border). Form fields: 50px inputs, 10px radius, safety focus ring, pill submit.
-- **FAQ** — real `<button>` accordion driven by `aria-expanded`; open item gets a shadow and accent border.
-- **Footer** — `--night` background, safety gradient top rule, link columns, bottom bar.
+- **Section titles** — `.section-title` with one `.eyebrow` (small caps,
+  `--primary`) and one `h2`. Centered, max 640px.
+- **Buttons** — `.btn-primary` (blurple fill, white text, 8px radius, one per
+  view) and `.btn-secondary` (white card-style button with a subtle border and
+  shadow — it supports, never competes).
+- **Navbar** — translucent white blur bar, shrinks on scroll
+  (`.navbar-scrolled`), blurple underline on active/hover links.
+- **Hero** — 92vh, gradient-mesh wash, eyebrow pill with blurple dot,
+  `clamp()` headline in Inter 700, primary + secondary CTAs, photo panel with
+  a soft mesh glow behind it.
+- **Service cards** — `.service-box`: media area, `.status-badge`
+  (`.available` green tint / `.busy` amber tint), title, copy, `.rate` line,
+  CTA. Hover lifts the card and zooms the media.
+- **Process steps** — `.process-step`: small-caps step number in `--primary`,
+  icon chip (soft tint, fills blurple on hover), title, copy.
+- **Quote panels** — `.quote .info` (contact rows with soft-tint icon chips)
+  and `.quote .quote-form`. Form fields: 50px inputs, 8px radius, 1px
+  `--line` border, Stripe-like focus state (blurple border + `--ring` glow),
+  8px-radius blurple submit.
+- **FAQ** — real `<button>` accordion driven by `aria-expanded`; open item
+  gets a shadow and a `--primary-line` border.
+- **Footer** — `--night` navy background, hazard-stripe top rule (the one
+  surviving construction motif), link columns, bottom bar.
 
-## Mapping from the bees site
+## Mapping from the previous (Apple-derived) system
 
-| Bees | Square Construction | Notes |
+| Before | Now | Notes |
 |---|---|---|
-| `--honey` `#f1a817` | `--safety` `#e8590c` | Accent fill, swapped hue family |
-| `--honey-ink` | `--safety-ink` | Text on accent fills |
-| `--amber-deep` | `--ember-deep` | Text accent |
-| `--bark` / `--bark-deep` | `--steel` / `--steel-deep` | Secondary actions: brown → slate |
-| Hexagon tile/motif | Hazard stripe + blueprint grid | Signature element swap |
-| `.product-box` / `.stock-badge` | `.service-box` / `.status-badge` | Same card pattern, service semantics |
-| `.booking` section | `.quote` section | Same panel pattern, renamed |
-| `.btn-shop` / `.btn-book` | `.btn-primary` / `.btn-secondary` | Generic names for reuse |
-| Playfair Display + Poppins | Playfair Display + Poppins | Kept — it's the "same feel" |
+| `--paper` `#fdfcf8` (warm) | `#ffffff` | Warm paper → clean white |
+| `--tint` `#f4f2ec` | `--tint` `#f6f9fc` | Warm grey → Stripe cool grey |
+| `--ink` `#23211b` | `--ink` `#0a2540` | Warm black → Stripe navy |
+| `--safety` `#e8590c` + `--safety-ink` | `--primary` `#635bff` + `--on-primary` | Safety orange → blurple |
+| `--ember-deep` `#a83e05` (text accent) | `--primary` / `--primary-deep` | One accent family instead of two |
+| `--steel` / `--steel-deep` | — (roles absorbed) | Secondary button is now a white card button |
+| `--safety-soft` | `--primary-soft` `#efeeff` | Icon-chip tint |
+| Playfair Display + Poppins | Inter only | Display voice via weight + tracking |
+| Pill buttons | 8px-radius buttons | Badges stay pills |
+| Hazard stripe (several places) | Gradient mesh + hazard in footer only | Signature swap |
+| `prefers-color-scheme: dark` override | Dropped | Stripe marketing surfaces are light |
 
-Section rhythm (88px desktop / 64px ≤991px), card shadows, pill buttons,
-eyebrow pattern, FAQ behavior, and responsive breakpoints (991/768/576px)
-are carried over unchanged.
+Section rhythm (88px desktop / 64px ≤991px), card pattern, eyebrow pattern,
+FAQ behavior, form validation hooks, and responsive breakpoints (991/576px)
+are carried over unchanged. All copy, section ids, form field ids, and the
+classes `script.js` / `quote-form.js` rely on are untouched.
 
 ## Extending
 
 1. Add tokens to `tokens.css` — never hard-code a color in a component.
 2. New components go in `components.css` with a comment divider, following the
    existing naming (kebab-case, `.section .component` scoping).
-3. Keep the signature element scarce: if the stripe appears more than a few
-   times per viewport, it's too much.
+3. Keep the signatures scarce: the gradient mesh belongs in the hero, the
+   hazard stripe belongs in the footer rule. Nowhere else.
 4. Check contrast for any new text/background pair (aim ≥ 4.5:1) and note it
    in the token comment block.

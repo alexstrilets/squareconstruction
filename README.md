@@ -1,8 +1,8 @@
 # Square Construction
 
 Static marketing site for Square Construction (Edmonton general contracting).
-Design system in `design-system/` — see `DESIGN_SYSTEM.md` for tokens,
-components, and usage.
+Design system in `design-system/` — a Stripe-derived, token-based system;
+see `DESIGN_SYSTEM.md` for tokens, components, and usage.
 
 ## Status
 
