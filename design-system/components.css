@@ -1,6 +1,8 @@
 /*--------------------------------------------------------------
 # Square Construction — design system · components
 # Cards, badges, process steps, quote form, FAQ, footer.
+# Stripe-derived: soft layered shadows, 16px card radii, tint
+# badges, blurple focus rings. All colours via tokens.css.
 --------------------------------------------------------------*/
 @import url("tokens.css");
 
@@ -25,7 +27,7 @@
   left: 0;
   top: 2px;
   font-size: 20px;
-  color: var(--ember-deep);
+  color: var(--primary);
   line-height: 1.4;
 }
 
@@ -84,6 +86,7 @@
   transform: scale(1.04);
 }
 
+/* Status badges: soft tints, never solid fills */
 .status-badge {
   position: absolute;
   top: 12px;
@@ -100,23 +103,23 @@
 
 .status-badge.available {
   color: var(--ok);
-  background: rgba(233, 244, 234, 0.94);
-  border: 1px solid rgba(47, 125, 50, 0.25);
+  background: var(--ok-bg);
+  border: 1px solid var(--ok-line);
 }
 
 .status-badge.busy {
   color: var(--busy);
-  background: rgba(241, 236, 226, 0.94);
-  border: 1px solid rgba(138, 127, 112, 0.3);
+  background: var(--busy-bg);
+  border: 1px solid var(--busy-line);
 }
 
 .services .service-box h3 {
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 10px;
   font-size: 1.3rem;
   color: var(--ink);
   font-family: var(--font-body);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 
 .services .service-box p {
@@ -128,7 +131,7 @@
 
 .services .service-box .rate {
   font-size: 1.05rem;
-  color: var(--ember-deep);
+  color: var(--primary);
   font-weight: 600;
   margin-bottom: 18px;
   margin-top: auto;
@@ -167,7 +170,7 @@
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--ember-deep);
+  color: var(--primary);
   display: block;
   margin-bottom: 14px;
 }
@@ -182,16 +185,17 @@
   height: 76px;
   line-height: 76px;
   text-align: center;
-  color: var(--safety-ink);
-  background: var(--safety-soft);
-  border: 1.5px solid rgba(232, 89, 12, 0.4);
+  color: var(--primary);
+  background: var(--primary-soft);
+  border: 1.5px solid var(--primary-line);
   border-radius: 50%;
   transition: var(--transition);
 }
 
 .process .process-step:hover .icon i {
-  background: var(--safety);
-  border-color: var(--safety);
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
   transform: scale(1.05);
 }
 
@@ -214,7 +218,6 @@
 .quote .info,
 .quote .quote-form {
   border: 1px solid var(--line);
-  border-top: 4px solid var(--safety);
   padding: 32px;
   background: var(--card);
   box-shadow: var(--shadow-card);
@@ -238,11 +241,11 @@
 
 .quote .info i {
   font-size: 18px;
-  color: var(--steel);
+  color: var(--primary);
   float: left;
   width: 44px;
   height: 44px;
-  background: var(--safety-soft);
+  background: var(--primary-soft);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -297,11 +300,11 @@
 .quote .email-form input,
 .quote .email-form textarea,
 .quote .email-form select {
-  border-radius: 10px;
+  border-radius: var(--radius-input);
   box-shadow: none;
   font-size: 0.95rem;
   padding: 12px 15px;
-  border: 1.5px solid var(--line);
+  border: 1px solid var(--line);
   transition: var(--transition);
   background: var(--paper);
   color: var(--ink);
@@ -311,14 +314,15 @@
 
 .quote .email-form input::placeholder,
 .quote .email-form textarea::placeholder {
-  color: #a89e8c;
+  color: var(--placeholder);
 }
 
+/* Stripe-like focus: blurple border + soft glow ring */
 .quote .email-form input:focus,
 .quote .email-form textarea:focus,
 .quote .email-form select:focus {
-  border-color: var(--safety);
-  box-shadow: 0 0 0 3px rgba(232, 89, 12, 0.22);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--ring);
   outline: none;
   background: var(--card);
 }
@@ -334,23 +338,24 @@
 }
 
 .quote .email-form button[type="submit"] {
-  background: var(--safety);
+  background: var(--primary);
   border: 0;
-  padding: 14px 40px;
-  color: var(--safety-ink);
+  padding: 13px 30px;
+  color: var(--on-primary);
   transition: var(--transition);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-btn);
   font-weight: 600;
   font-size: 0.95rem;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.01em;
   margin-top: 10px;
-  box-shadow: 0 6px 18px rgba(232, 89, 12, 0.32);
+  box-shadow: var(--shadow-btn);
   cursor: pointer;
 }
 
 .quote .email-form button[type="submit"]:hover {
+  background: var(--primary-deep);
   transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(232, 89, 12, 0.4);
+  box-shadow: var(--shadow-btn-lift);
 }
 
 .form-status {
@@ -364,19 +369,19 @@
 }
 
 .form-status.error {
-  color: var(--ember-deep);
+  color: var(--error);
 }
 
 /* Inline field errors: named next to the field, say how to fix it. */
 .field-error {
-  color: var(--ember-deep);
+  color: var(--error);
   font-size: 0.85rem;
   font-weight: 500;
   margin: 6px 0 0;
 }
 
 .field-hint {
-  color: var(--muted);
+  color: var(--faint);
   font-size: 0.85rem;
   margin: 6px 0 0;
 }
@@ -389,7 +394,7 @@
 .quote .email-form input[aria-invalid="true"],
 .quote .email-form textarea[aria-invalid="true"],
 .quote .email-form select[aria-invalid="true"] {
-  border-color: var(--ember-deep);
+  border-color: var(--error);
 }
 
 /*--------------------------------------------------------------
@@ -414,7 +419,7 @@
 
 .faq-item:has(.faq-question[aria-expanded="true"]) {
   box-shadow: var(--shadow-card);
-  border-color: rgba(232, 89, 12, 0.45);
+  border-color: var(--primary-line);
 }
 
 /* Real <button>: keyboard operable, announced by screen readers. */
@@ -434,7 +439,7 @@
 }
 
 .faq-question:hover {
-  background-color: var(--safety-soft);
+  background-color: var(--tint);
 }
 
 .faq-question h3 {
@@ -443,11 +448,11 @@
   font-weight: 600;
   color: var(--ink);
   font-family: var(--font-body);
-  letter-spacing: -0.005em;
+  letter-spacing: -0.01em;
 }
 
 .faq-arrow {
-  color: var(--ember-deep);
+  color: var(--primary);
   font-size: 0.9rem;
   transition: var(--transition);
   flex: none;
@@ -457,12 +462,12 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: var(--safety-soft);
+  background: var(--primary-soft);
 }
 
 .faq-question[aria-expanded="true"] .faq-arrow {
-  background: var(--safety);
-  color: var(--safety-ink);
+  background: var(--primary);
+  color: var(--on-primary);
 }
 
 .faq-question[aria-expanded="true"] .faq-arrow i {
@@ -488,11 +493,12 @@
 }
 
 /*--------------------------------------------------------------
-# Footer
+# Footer — dark navy band; the hazard stripe survives here,
+# as the top rule, and nowhere else in the system.
 --------------------------------------------------------------*/
 #footer {
   background: var(--night);
-  color: #d9d2c4;
+  color: var(--footer-text);
   font-size: 0.92rem;
   position: relative;
 }
@@ -504,7 +510,7 @@
   left: 0;
   width: 100%;
   height: 5px;
-  background: linear-gradient(90deg, var(--safety), var(--steel), var(--safety));
+  background: var(--hazard);
 }
 
 #footer .footer-top {
@@ -522,7 +528,7 @@
   font-size: 1.05rem;
   margin: 0 0 18px;
   font-weight: 600;
-  color: #fff;
+  color: var(--on-primary);
   font-family: var(--font-body);
   letter-spacing: 0.02em;
 }
@@ -538,12 +544,12 @@
 }
 
 #footer .footer-links a {
-  color: #d9d2c4;
+  color: var(--footer-text);
   font-size: 0.92rem;
 }
 
 #footer .footer-links a:hover {
-  color: var(--safety);
+  color: var(--on-primary);
 }
 
 #footer .footer-contact {
@@ -552,32 +558,29 @@
 }
 
 #footer .footer-contact p {
-  color: #b6ac99;
+  color: var(--footer-muted);
   font-size: 0.92rem;
 }
 
 #footer .copyright {
-  color: #b6ac99;
+  color: var(--footer-muted);
 }
 
 #footer .copyright strong {
-  color: #fff;
+  color: var(--on-primary);
 }
 
 #footer .footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--footer-line);
   padding: 22px 0;
 }
 
 /* Placeholder panels (swap for real photos later) */
 .hero-photo-placeholder {
-  border-radius: 28px;
+  border-radius: 20px;
   box-shadow: var(--shadow-lift);
   border: 1px solid var(--img-ring);
-  background:
-    var(--stripe-tile),
-    linear-gradient(135deg, var(--tint) 0%, #e9e2d2 100%);
-  background-size: 24px 24px, auto;
+  background: linear-gradient(135deg, var(--tint) 0%, var(--primary-soft) 100%);
   aspect-ratio: 4 / 3;
   display: flex;
   flex-direction: column;
@@ -589,7 +592,7 @@
 
 .hero-photo-placeholder i {
   font-size: 3rem;
-  color: var(--steel);
+  color: var(--primary);
   opacity: 0.6;
 }
 
@@ -606,12 +609,9 @@
   align-items: center;
   justify-content: center;
   font-size: 3.2rem;
-  color: var(--steel);
+  color: var(--primary);
   opacity: 0.35;
-  background:
-    var(--grid-tile),
-    linear-gradient(135deg, var(--tint) 0%, #e7e0cf 100%);
-  background-size: 48px 48px, auto;
+  background: linear-gradient(135deg, var(--tint) 0%, var(--primary-soft) 100%);
 }
 
 /*--------------------------------------------------------------
@@ -634,13 +634,13 @@
 
 .why .why-item i {
   font-size: 26px;
-  color: var(--safety-ink);
-  background: var(--safety);
+  color: var(--on-primary);
+  background: var(--primary);
   width: 56px;
   height: 56px;
   line-height: 56px;
   text-align: center;
-  border-radius: 16px;
+  border-radius: 14px;
   margin-bottom: 16px;
   display: inline-block;
 }

@@ -1,99 +1,104 @@
 /*--------------------------------------------------------------
 # Square Construction — design system · tokens
 #
-# Derived from the HoneycombsAndMore apple-design refresh (2026-10-12):
-# same token architecture and component rhythm, construction identity.
+# Stripe-derived system (2026-11-17): same token architecture as
+# the previous Apple-derived refresh, re-skinned to Stripe's
+# design language — deep navy ink, blurple primary, cool-grey
+# section tints, and the signature gradient mesh used sparingly.
 #
 # Contrast figures vs. their surfaces (WCAG AA):
-#   --ink        #23211B  15.7:1 on --paper   (primary text)
-#   --muted      #6E685B   5.4:1 on --paper   (secondary text)
-#   --safety     #E8590C  accent fill only    (never as text on light)
-#   --safety-ink #2E1500   4.8:1 on --safety  (text on orange fills)
-#   --ember-deep #A83E05   6.1:1 on --paper   (text accent)
-#   --steel      #445060   8.2:1 on white     (secondary actions)
-#   --ok         #2F7D32   5.1:1 on white     (available signal)
-# Type: Playfair Display = display voice (hero + section titles only),
-#       Poppins = everything else.
-# Signature element: the hazard stripe — diagonal safety-orange
-# striping, used sparingly (eyebrow tick, hero texture, footer rule).
+#   --ink          #0A2540  15.5:1 on white    (headings, primary text)
+#   --muted        #425466   7.8:1 on white    (body / secondary text)
+#   --faint        #697386   4.8:1 on white    (hints, captions)
+#   --primary      #635BFF   4.7:1 on white    (links, accents)
+#   --on-primary   #FFFFFF   4.7:1 on --primary (button text)
+#   --ok           #12714A   5.4:1 on --ok-bg  (available signal)
+#   --busy         #8A5A00   5.3:1 on --busy-bg (booking-out signal)
+#   --error        #DF1B41   4.8:1 on white    (field errors)
+#   --footer-text  #CBD6E8  10.6:1 on --night  (footer body)
+#   --footer-muted #8EA3C0   6.0:1 on --night  (footer secondary)
+# Type: Inter throughout — headings carry the display voice via
+# weight (600–700) and tight tracking (-0.02em), body at 400/500.
+# Signature element: the gradient mesh (purple → cyan → coral),
+# confined to the hero. The old hazard stripe survives in exactly
+# one place: the footer top rule.
+#
+# No dark-scheme override: Stripe's marketing surfaces are light,
+# and the semantic tokens below keep one easy to re-add later.
 --------------------------------------------------------------*/
 :root {
-  --paper: #fdfcf8;
+  /* Core palette */
+  --paper: #ffffff;
   --card: #ffffff;
-  --tint: #f4f2ec;
-  --line: #e4dfd4;
-  --ink: #23211b;
-  --muted: #6e685b;
-  --safety: #e8590c;
-  --safety-soft: #fdeadb;
-  --safety-ink: #2e1500;
-  --ember-deep: #a83e05;
-  --steel: #445060;
-  --steel-deep: #333d48;
-  --ok: #2f7d32;
-  --ok-bg: #e9f4ea;
-  --busy: #8a7f70;
-  --busy-bg: #f1ece2;
-  --night: #211d16;
+  --tint: #f6f9fc;
+  --line: #e3e8ee;
+  --ink: #0a2540;
+  --muted: #425466;
+  --faint: #697386;
+  --placeholder: #a7b5c6;
 
-  --font-display: "Playfair Display", Georgia, serif;
-  --font-body: "Poppins", -apple-system, "Segoe UI", sans-serif;
+  /* Primary action colour (Stripe blurple) */
+  --primary: #635bff;
+  --primary-deep: #4a42d6;
+  --primary-soft: #efeeff;
+  --primary-line: rgba(99, 91, 255, 0.45);
+  --on-primary: #ffffff;
+  --ring: rgba(99, 91, 255, 0.28);
 
-  /* Surfaces that must follow the color scheme (see dark override below) */
-  --nav-bg: rgba(253, 252, 248, 0.88);
-  --hero-top: #fdfcf8;
-  --hero-bottom: #f7f3ea;
-  --hero-glow: #fdeadb;
-  --pill-bg: rgba(255, 255, 255, 0.7);
-  --on-steel: #ffffff;
-  --img-ring: rgba(255, 255, 255, 0.6);
+  /* Gradient mesh stops — hero accent only */
+  --grad-purple: #635bff;
+  --grad-cyan: #00d4ff;
+  --grad-coral: #ff8a5c;
+  --gradient-mesh:
+    radial-gradient(640px 320px at 12% -4%, color-mix(in srgb, var(--grad-purple) 20%, transparent), transparent 62%),
+    radial-gradient(720px 360px at 88% -6%, color-mix(in srgb, var(--grad-cyan) 16%, transparent), transparent 62%),
+    radial-gradient(520px 280px at 55% -10%, color-mix(in srgb, var(--grad-coral) 13%, transparent), transparent 62%);
 
+  /* Status signals */
+  --ok: #12714a;
+  --ok-bg: #e7f6ee;
+  --ok-line: rgba(18, 113, 74, 0.3);
+  --busy: #8a5a00;
+  --busy-bg: #fdf1de;
+  --busy-line: rgba(138, 90, 0, 0.32);
+  --error: #df1b41;
+
+  /* Footer (dark navy band) */
+  --night: #0a2540;
+  --footer-text: #cbd6e8;
+  --footer-muted: #8ea3c0;
+  --footer-line: rgba(255, 255, 255, 0.12);
+
+  /* Type */
+  --font-display: "Inter", -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Inter", -apple-system, "Segoe UI", sans-serif;
+
+  /* Surfaces */
+  --nav-bg: rgba(255, 255, 255, 0.86);
+  --pill-bg: rgba(255, 255, 255, 0.78);
+  --img-ring: rgba(10, 37, 64, 0.1);
+
+  /* Shape */
   --radius-card: 16px;
-  --radius-pill: 999px;  --shadow-card: 0 2px 6px rgba(35, 30, 18, 0.06), 0 12px 32px rgba(35, 30, 18, 0.08);
-  --shadow-lift: 0 4px 10px rgba(35, 30, 18, 0.08), 0 20px 44px rgba(35, 30, 18, 0.14);
+  --radius-btn: 8px;
+  --radius-input: 8px;
+  --radius-pill: 999px;
+
+  /* Layered, navy-tinted shadows (Stripe-style depth) */
+  --shadow-card: 0 2px 5px rgba(10, 37, 64, 0.05), 0 12px 32px rgba(10, 37, 64, 0.08);
+  --shadow-lift: 0 4px 10px rgba(10, 37, 64, 0.06), 0 24px 48px rgba(10, 37, 64, 0.14);
+  --shadow-nav: 0 8px 24px rgba(10, 37, 64, 0.06);
+  --shadow-nav-scrolled: 0 10px 28px rgba(10, 37, 64, 0.1);
+  --shadow-btn: 0 2px 5px rgba(10, 37, 64, 0.12), 0 8px 18px rgba(99, 91, 255, 0.22);
+  --shadow-btn-lift: 0 4px 8px rgba(10, 37, 64, 0.12), 0 12px 26px rgba(99, 91, 255, 0.3);
+
   --transition: 0.25s ease;
 
-  /* Blueprint grid — faint, for hero backgrounds */
-  --grid-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath d='M48 0 H0 V48' fill='none' stroke='%23445060' stroke-opacity='0.08' stroke-width='1'/%3E%3C/svg%3E");
-
-  /* Hazard striping — the signature texture, keep at low opacity */
-  --stripe-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M-6 6 L6 -6 M0 24 L24 0 M18 30 L30 18' stroke='%23E8590C' stroke-opacity='0.14' stroke-width='5'/%3E%3C/svg%3E");
-}
-
-/*--------------------------------------------------------------
-# Dark appearance — semantic tokens, no app-level switch.
-# Contrast vs. dark surfaces: ink 15.1:1, muted 7.5:1,
-# safety-ink on safety 5.9:1, ember-deep 7.6:1, steel 8.0:1.
---------------------------------------------------------------*/
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #1b1813;
-    --card: #24211b;
-    --tint: #221f18;
-    --line: #3a352a;
-    --ink: #f2ede1;
-    --muted: #b3a88f;
-    --safety: #f4701f;
-    --safety-soft: #3a2a18;
-    --safety-ink: #2e1500;
-    --ember-deep: #f0925a;
-    --steel: #9fb0c2;
-    --steel-deep: #7d8fa1;
-    --ok: #7cc47f;
-    --ok-bg: #1e2f20;
-    --busy: #a89a86;
-    --busy-bg: #2c2820;
-    --night: #14120d;
-
-    --nav-bg: rgba(27, 24, 19, 0.88);
-    --hero-top: #201c15;
-    --hero-bottom: #191510;
-    --hero-glow: #3a2a18;
-    --pill-bg: rgba(36, 33, 27, 0.7);
-    --on-steel: #14120d;
-    --img-ring: rgba(255, 255, 255, 0.14);
-
-    --shadow-card: 0 2px 6px rgba(0, 0, 0, 0.3), 0 12px 32px rgba(0, 0, 0, 0.35);
-    --shadow-lift: 0 4px 10px rgba(0, 0, 0, 0.35), 0 20px 44px rgba(0, 0, 0, 0.45);
-  }
+  /* Hazard striping — the construction signature, kept scarce:
+     used ONLY as the footer top rule (see components.css). */
+  --hazard: repeating-linear-gradient(
+    -45deg,
+    var(--primary) 0 10px,
+    transparent 10px 20px
+  );
 }
