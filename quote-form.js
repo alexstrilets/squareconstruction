@@ -1,33 +1,12 @@
-/* Square Construction — quote form via EmailJS.
-   Same pattern as the HoneycombsAndMore contact form (contact-form.js).
-   Quote requests land in Alex's inbox for now.
-   SETUP (2 minutes, EmailJS dashboard at https://dashboard.emailjs.com):
-     1. Create a new template, e.g. "square-construction-quote".
-     2. Set its To email to Alex's address.
-     3. Use these variables in the template body:
-        {{name}} {{phone}} {{customer_email}} {{project_type}} {{details}}
-     4. To receive the optional job photo as an attachment: template settings
-        → Attachments → add a file attachment mapped to the {{photo}} variable.
-     5. Paste the template ID into EMAILJS_TEMPLATE_ID below. */
+/* Square Construction — quote form via contact.php (PHPMailer + SMTP).
+   Same pattern as the Local AI Geeks and HoneycombsAndMore forms.
+   Quote requests land in Dima's inbox (sergeyalyosh@gmail.com) via the
+   info@squareconstruction.ca mailbox. An optional job photo is attached
+   to the email as a real file upload (max 2 MB). */
 (function () {
   'use strict';
 
-  var EMAILJS_PUBLIC_KEY = 'oYEqabkFp7Wvp_3VA'; // Alex's EmailJS public key (same as bees site)
-  var EMAILJS_SERVICE_ID = 'service_xdhrral';  // Alex's EmailJS service (same as bees site)
-  var EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID'; // <-- create the template (see above), paste its ID here
-
   function initQuoteForm() {
-    if (typeof emailjs === 'undefined') {
-      console.error('EmailJS library not loaded');
-      return;
-    }
-    try {
-      emailjs.init(EMAILJS_PUBLIC_KEY);
-    } catch (error) {
-      console.error('EmailJS initialization failed:', error);
-      return;
-    }
-
     var form = document.querySelector('#quote-form');
     var submitButton = form ? form.querySelector('button[type="submit"]') : null;
     if (!form || !submitButton) {
@@ -36,15 +15,6 @@
     }
     var originalButtonText = submitButton.innerHTML;
     var status = document.getElementById('form-status');
-
-    /* Not wired yet: say so plainly instead of failing silently. */
-    if (EMAILJS_TEMPLATE_ID === 'YOUR_TEMPLATE_ID') {
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        setStatus('The form is not connected to an inbox yet — the EmailJS template ID still needs to be pasted into quote-form.js (see the SETUP comment at the top).', false);
-      });
-      return;
-    }
 
     /* Dynamic validation: flag problems on blur, clear them on input. */
     var validators = {
@@ -104,40 +74,54 @@
       submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...';
       setStatus('', true);
 
-      readPhoto().then(function (photoDataUrl) {
-        return emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-          name: data.name,
-          phone: data.phone,
-          customer_email: data.email,
-          project_type: data.project_type,
-          details: data.details,
-          photo: photoDataUrl || ''
+      /* Send via the server-side handler (PHPMailer + SMTP), same as the
+         Local AI Geeks and HoneycombsAndMore forms. The photo goes as a
+         real file upload inside the FormData. */
+      fetch('contact.php', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      })
+        .then(function (response) {
+          return response.json().then(function (payload) {
+            return { ok: response.ok && payload.ok, payload: payload };
+          });
+        })
+        .then(function (result) {
+          if (!result.ok) {
+            throw new Error(result.payload.error || 'The server did not accept the message.');
+          }
+          setStatus('Quote request sent. We usually reply within one business day.', true);
+          form.reset();
+          window.scrollTo(0, scrollPos);
+        })
+        .catch(function (error) {
+          console.error('Quote request failed:', error);
+          // Fall back to copying the request so the customer can email it instead
+          var text =
+            'Name: ' + data.name + '\n' +
+            'Phone: ' + data.phone + '\n' +
+            'Email: ' + data.email + '\n' +
+            'Project type: ' + data.project_type + '\n\n' +
+            data.details;
+          var fallback =
+            'The request could not be sent just now. Your quote request has been copied — ' +
+            'please paste it into an email to info@squareconstruction.ca.';
+          var copy = navigator.clipboard && navigator.clipboard.writeText
+            ? navigator.clipboard.writeText(text)
+            : Promise.reject(new Error('clipboard unavailable'));
+          copy.then(function () {
+            setStatus(fallback, false);
+          }).catch(function () {
+            setStatus('The request could not be sent. Please email us at info@squareconstruction.ca.', false);
+          });
+          window.scrollTo(0, scrollPos);
+        })
+        .finally(function () {
+          submitButton.disabled = false;
+          submitButton.innerHTML = originalButtonText;
         });
-      }).then(function () {
-        setStatus('Quote request sent. We usually reply within one business day.', true);
-        form.reset();
-        window.scrollTo(0, scrollPos);
-      }).catch(function (error) {
-        console.error('Email sending failed:', error);
-        setStatus('The request could not be sent. Call or text (780) 555-0134 instead — that always works.', false);
-        window.scrollTo(0, scrollPos);
-      }).finally(function () {
-        submitButton.disabled = false;
-        submitButton.innerHTML = originalButtonText;
-      });
     });
-
-    /* Optional job photo → base64 data URL for the {{photo}} template variable. */
-    function readPhoto() {
-      return new Promise(function (resolve) {
-        var file = document.getElementById('q-photo').files[0];
-        if (!file) { resolve(''); return; }
-        var reader = new FileReader();
-        reader.onload = function () { resolve(reader.result); };
-        reader.onerror = function () { resolve(''); };
-        reader.readAsDataURL(file);
-      });
-    }
 
     function setStatus(text, ok) {
       if (!status) return;

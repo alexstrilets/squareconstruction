@@ -250,12 +250,10 @@
           <div class="quote-form">
             <h4>Request a quote</h4>
             <p>Quote volume is low, so every request lands directly in our inbox &mdash; no ticket queues.</p>
-            <!-- Quote requests are delivered via EmailJS (see quote-form.js).
-                 Template setup: EmailJS dashboard → new template addressed to
-                 Alex, variables {{name}} {{phone}} {{customer_email}}
-                 {{project_type}} {{details}}, then paste its ID into
-                 EMAILJS_TEMPLATE_ID in quote-form.js. -->
-            <form class="email-form" id="quote-form" action="#" method="POST" novalidate>
+            <!-- Quote requests are delivered via contact.php (PHPMailer + SMTP,
+                 info@squareconstruction.ca → sergeyalyosh@gmail.com). -->
+            <form class="email-form" id="quote-form" action="contact.php" method="post" enctype="multipart/form-data" novalidate>
+              <input type="text" name="company" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
@@ -404,7 +402,6 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script src="script.js"></script>
   <script src="quote-form.js"></script>
 </body>
