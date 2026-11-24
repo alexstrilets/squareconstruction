@@ -309,6 +309,9 @@ section {
 }
 
 .hero .hero-img img {
+  width: 100%;
+  height: auto;
+  display: block;
   border-radius: 20px;
   box-shadow: var(--shadow-lift);
   border: 1px solid var(--img-ring);
